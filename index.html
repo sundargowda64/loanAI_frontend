@@ -34,19 +34,28 @@
       animation: floatup .9s cubic-bezier(.2,.9,.2,1) both 
     }
 
-    /* Floating glowing chatbot button */
-    @keyframes floatbot {
-      0%, 100% { 
-        transform: translateY(0); 
-        box-shadow: 0 0 20px rgba(14,165,255,0.3), 0 0 35px rgba(124,58,237,0.25); 
-      }
-      50% { 
-        transform: translateY(-6px); 
-        box-shadow: 0 0 25px rgba(14,165,255,0.45), 0 0 45px rgba(124,58,237,0.35); 
-      }
+    /* NEW: Chatbot glowing pulse */
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 12px rgba(14,165,255,0.4), 0 0 24px rgba(124,58,237,0.35); }
+      50% { box-shadow: 0 0 22px rgba(14,165,255,0.7), 0 0 38px rgba(124,58,237,0.55); }
+      100% { box-shadow: 0 0 12px rgba(14,165,255,0.4), 0 0 24px rgba(124,58,237,0.35); }
     }
-    .animate-floatbot {
-      animation: floatbot 3s ease-in-out infinite;
+
+    /* NEW: Floating animation for bot */
+    @keyframes floatBubble {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    /* Apply both effects */
+    .chatbot-float {
+      animation: floatBubble 3s ease-in-out infinite,
+                 pulseGlow 2.6s ease-in-out infinite;
+    }
+
+    .chatbot-hover:hover {
+      transform: scale(1.12);
+      transition: 0.25s ease;
     }
   </style>
 </head>
@@ -87,12 +96,25 @@
     <div class="max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-36 flex flex-col lg:flex-row items-center gap-12">
 
       <div class="w-full lg:w-6/12 space-y-6 animate-floatup">
-        <h1 class="text-4xl lg:text-5xl font-extrabold text-white leading-tight neon-text">Get approved faster — AI-powered loans in minutes</h1>
-        <p class="text-gray-400 max-w-xl">LoanAI uses secure KYC, automated income assessment and risk scoring to deliver customized loan offers — instant eligibility checks, transparent EMIs, and safe disbursals.</p>
+        <h1 class="text-4xl lg:text-5xl font-extrabold text-white leading-tight neon-text">
+          Get approved faster — AI-powered loans in minutes
+        </h1>
+        <p class="text-gray-400 max-w-xl">
+          LoanAI uses secure KYC, automated income assessment and risk scoring to
+          deliver customized loan offers — instant eligibility checks, transparent
+          EMIs, and safe disbursals.
+        </p>
 
         <div class="flex items-center gap-4">
-          <a href="Eligibility_Result.html" class="px-6 py-3 rounded-lg bg-gradient-to-r from-primary to-accent text-black font-semibold shadow-neon hover:scale-[1.02] transition">Check Eligibility</a>
-          <a href="loan_Offers.html" class="px-5 py-3 rounded-lg border border-gray-700 text-sm hover:bg-white/5 transition">View Loan Offers</a>
+          <a href="Eligibility_Result.html"
+             class="px-6 py-3 rounded-lg bg-gradient-to-r from-primary to-accent text-black font-semibold shadow-neon hover:scale-[1.02] transition">
+            Check Eligibility
+          </a>
+
+          <a href="loan_Offers.html"
+             class="px-5 py-3 rounded-lg border border-gray-700 text-sm hover:bg-white/5 transition">
+            View Loan Offers
+          </a>
         </div>
 
         <!-- quick form -->
@@ -100,21 +122,34 @@
           <form class="grid grid-cols-1 md:grid-cols-3 gap-3 items-end">
             <div>
               <label class="text-xs text-gray-400">Monthly Income</label>
-              <input type="number" placeholder="₹ 50,000" class="mt-1 p-2 w-full rounded-md bg-transparent border border-gray-800 focus:ring-2 focus:ring-primary outline-none" />
+              <input type="number" placeholder="₹ 50,000"
+                class="mt-1 p-2 w-full rounded-md bg-transparent border border-gray-800 
+                       focus:ring-2 focus:ring-primary outline-none" />
             </div>
+
             <div>
               <label class="text-xs text-gray-400">Requested Amount</label>
-              <input type="number" placeholder="₹ 2,00,000" class="mt-1 p-2 w-full rounded-md bg-transparent border border-gray-800 focus:ring-2 focus:ring-primary outline-none" />
+              <input type="number" placeholder="₹ 2,00,000"
+                class="mt-1 p-2 w-full rounded-md bg-transparent border border-gray-800 
+                       focus:ring-2 focus:ring-primary outline-none" />
             </div>
+
             <div>
-              <button class="w-full px-4 py-2 bg-primary text-black rounded-md font-semibold">Quick Check</button>
+              <button class="w-full px-4 py-2 bg-primary text-black rounded-md font-semibold">
+                Quick Check
+              </button>
             </div>
           </form>
         </div>
 
         <div class="flex items-center gap-6 mt-4 text-sm text-gray-400">
-          <div class="flex items-center gap-2"><span class="w-2 h-2 bg-green-500 rounded-full"></span> 98% Document Accuracy</div>
-          <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary rounded-full"></span> 1–10 min Processing</div>
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 bg-green-500 rounded-full"></span> 98% Document Accuracy
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 bg-primary rounded-full"></span> 1–10 min Processing
+          </div>
         </div>
       </div>
 
@@ -122,12 +157,14 @@
       <div class="w-full lg:w-6/12 relative">
         <div class="relative rounded-2xl overflow-hidden shadow-neon">
           <div class="bg-gradient-to-br from-[#001220] via-[#001026] to-black p-8 lg:p-12 rounded-2xl">
+
             <div class="flex items-center justify-between text-xs text-gray-400 mb-6">
               <div>LoanAI • Secure</div>
               <div>Live Demo</div>
             </div>
 
             <div class="bg-gradient-to-r from-gray-900/30 to-transparent p-6 rounded-xl border border-gray-800">
+
               <h4 class="text-white font-semibold">Estimated Offer Preview</h4>
               <p class="text-gray-400 text-sm mt-1">Personal Loan — Fast track</p>
 
@@ -136,14 +173,17 @@
                   <p class="text-xs text-gray-400">Amount</p>
                   <p class="text-xl font-bold">₹ 2,50,000</p>
                 </div>
+
                 <div class="p-4 bg-black/40 rounded-xl">
                   <p class="text-xs text-gray-400">Tenure</p>
                   <p class="text-xl font-bold">36 mo</p>
                 </div>
+
                 <div class="p-4 bg-black/40 rounded-xl">
                   <p class="text-xs text-gray-400">Rate</p>
                   <p class="text-xl font-bold">12.5%</p>
                 </div>
+
                 <div class="p-4 bg-black/40 rounded-xl">
                   <p class="text-xs text-gray-400">EMI</p>
                   <p class="text-xl font-bold text-green-400">₹ 9,950</p>
@@ -151,14 +191,33 @@
               </div>
 
               <div class="mt-6 flex items-center gap-3">
-                <a href="loan_Offers.html" class="px-4 py-2 bg-primary text-black rounded-md font-semibold">Apply Now</a>
-                <a href="emi_calculator.html" class="px-3 py-2 border border-gray-700 rounded-md">Customize</a>
+                <a href="loan_Offers.html"
+                   class="px-4 py-2 bg-primary text-black rounded-md font-semibold">
+                  Apply Now
+                </a>
+
+                <a href="emi_calculator.html"
+                   class="px-3 py-2 border border-gray-700 rounded-md">
+                  Customize
+                </a>
               </div>
 
             </div>
           </div>
 
-          <svg class="absolute -right-8 -bottom-8 opacity-20" width="280" height="280" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#0ea5ff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs><rect x="0" y="0" width="280" height="280" stroke="url(#g1)" stroke-width="0.5" rx="12"/></svg>
+          <!-- decorative neon grid -->
+          <svg class="absolute -right-8 -bottom-8 opacity-20" width="280" height="280"
+               viewBox="0 0 280 280" fill="none"
+               xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1">
+                <stop offset="0" stop-color="#0ea5ff"/>
+                <stop offset="1" stop-color="#7c3aed"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="280" height="280" stroke="url(#g1)" stroke-width="0.5" rx="12"/>
+          </svg>
+
         </div>
       </div>
 
@@ -168,12 +227,15 @@
   <!-- FEATURES -->
   <section class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
     <div class="grid md:grid-cols-3 gap-6">
+
       <div class="p-6 bg-gray-900 rounded-2xl border border-gray-800 shadow-neon hover:scale-102 transition transform">
         <div class="flex items-center gap-3 mb-3">
           <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center text-black">AI</div>
           <h4 class="font-semibold">AI-driven Eligibility</h4>
         </div>
-        <p class="text-gray-400 text-sm">Instant checks using verified income parsing, document OCR and scoring models.</p>
+        <p class="text-gray-400 text-sm">
+          Instant checks using verified income parsing, document OCR and scoring models.
+        </p>
       </div>
 
       <div class="p-6 bg-gray-900 rounded-2xl border border-gray-800 shadow-neon hover:scale-102 transition transform">
@@ -181,7 +243,9 @@
           <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center text-black">🔒</div>
           <h4 class="font-semibold">Secure & Compliant</h4>
         </div>
-        <p class="text-gray-400 text-sm">End-to-end encryption, GDPR ready deletion flows, and secure audits.</p>
+        <p class="text-gray-400 text-sm">
+          End-to-end encryption, GDPR ready deletion flows, and secure audits.
+        </p>
       </div>
 
       <div class="p-6 bg-gray-900 rounded-2xl border border-gray-800 shadow-neon hover:scale-102 transition transform">
@@ -189,8 +253,11 @@
           <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center text-black">⚡</div>
           <h4 class="font-semibold">Fast Disbursals</h4>
         </div>
-        <p class="text-gray-400 text-sm">Automated approvals and payout pipelines for fastest fund delivery.</p>
+        <p class="text-gray-400 text-sm">
+          Automated approvals and payout pipelines for fastest fund delivery.
+        </p>
       </div>
+
     </div>
   </section>
 
@@ -198,18 +265,24 @@
   <section class="bg-gradient-to-b from-black/50 to-black py-12 border-t border-gray-800">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="grid md:grid-cols-3 gap-6 text-center">
+
         <div class="p-6 bg-gray-900 rounded-2xl border border-gray-800">
           <h3 class="text-3xl font-bold text-primary">1.2M+</h3>
           <p class="text-gray-400">Applications processed</p>
         </div>
+
         <div class="p-6 bg-gray-900 rounded-2xl border border-gray-800">
           <h3 class="text-3xl font-bold text-primary">92%</h3>
           <p class="text-gray-400">Avg approval accuracy</p>
         </div>
+
         <div class="p-6 bg-gray-900 rounded-2xl border border-gray-800">
-          <h3 class="text-3xl font-bold text-primary"><span class="text-green-400">99%</span></h3>
+          <h3 class="text-3xl font-bold text-primary">
+            <span class="text-green-400">99%</span>
+          </h3>
           <p class="text-gray-400">Data extraction accuracy</p>
         </div>
+
       </div>
     </div>
   </section>
@@ -217,21 +290,30 @@
   <!-- HOW IT WORKS -->
   <section class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
     <h2 class="text-2xl font-bold mb-6">How it works</h2>
+
     <div class="grid md:grid-cols-3 gap-6">
       <div class="p-6 bg-gray-900 rounded-2xl border border-gray-800">
         <div class="text-sm text-primary font-semibold mb-2">Step 1</div>
         <h3 class="font-bold">Upload KYC</h3>
-        <p class="text-gray-400 text-sm mt-2">Securely upload Aadhaar, PAN and income proof — OCR reads and validates instantly.</p>
+        <p class="text-gray-400 text-sm mt-2">
+          Securely upload Aadhaar, PAN and income proof — OCR reads and validates instantly.
+        </p>
       </div>
+
       <div class="p-6 bg-gray-900 rounded-2xl border border-gray-800">
         <div class="text-sm text-primary font-semibold mb-2">Step 2</div>
         <h3 class="font-bold">AI Assessment</h3>
-        <p class="text-gray-400 text-sm mt-2">Income parsing, credit checks and policy rules determine eligibility.</p>
+        <p class="text-gray-400 text-sm mt-2">
+          Income parsing, credit checks and policy rules determine eligibility.
+        </p>
       </div>
+
       <div class="p-6 bg-gray-900 rounded-2xl border border-gray-800">
         <div class="text-sm text-primary font-semibold mb-2">Step 3</div>
         <h3 class="font-bold">Offer & Disburse</h3>
-        <p class="text-gray-400 text-sm mt-2">Choose offers, e-sign and receive funds through secure payout rails.</p>
+        <p class="text-gray-400 text-sm mt-2">
+          Choose offers, e-sign and receive funds through secure payout rails.
+        </p>
       </div>
     </div>
   </section>
@@ -239,17 +321,26 @@
   <!-- TESTIMONIALS -->
   <section class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
     <h2 class="text-2xl font-bold mb-6">What customers say</h2>
+
     <div class="grid md:grid-cols-3 gap-6">
       <blockquote class="bg-gray-900 p-6 rounded-2xl border border-gray-800">
-        <p class="text-gray-300">"Fast, transparent and the AI assistant helped me through every step. Got funds in 24 hours."</p>
+        <p class="text-gray-300">
+          "Fast, transparent and the AI assistant helped me through every step. Got funds in 24 hours."
+        </p>
         <footer class="mt-4 text-sm text-gray-400">— Priya, Mumbai</footer>
       </blockquote>
+
       <blockquote class="bg-gray-900 p-6 rounded-2xl border border-gray-800">
-        <p class="text-gray-300">"KYC was seamless. The documents scanned perfectly and I received an instant offer."</p>
+        <p class="text-gray-300">
+          "KYC was seamless. The documents scanned perfectly and I received an instant offer."
+        </p>
         <footer class="mt-4 text-sm text-gray-400">— Saurav, Bangalore</footer>
       </blockquote>
+
       <blockquote class="bg-gray-900 p-6 rounded-2xl border border-gray-800">
-        <p class="text-gray-300">"Helpful EMI calculator and great UX for choosing the tenure."</p>
+        <p class="text-gray-300">
+          "Helpful EMI calculator and great UX for choosing the tenure."
+        </p>
         <footer class="mt-4 text-sm text-gray-400">— Ananya, Delhi</footer>
       </blockquote>
     </div>
@@ -258,9 +349,12 @@
   <!-- FOOTER -->
   <footer class="bg-black border-t border-gray-800 py-10">
     <div class="max-w-7xl mx-auto px-6 lg:px-8 grid md:grid-cols-4 gap-8 text-gray-400">
+
       <div>
         <h4 class="text-white font-bold mb-2">LoanAI</h4>
-        <p class="text-sm">AI-powered loan approvals — fast, secure and transparent.</p>
+        <p class="text-sm">
+          AI-powered loan approvals — fast, secure and transparent.
+        </p>
       </div>
 
       <div>
@@ -289,23 +383,32 @@
           <li><a href="admin_login.html" class="hover:text-white">Admin</a></li>
         </ul>
       </div>
+
     </div>
 
-    <div class="mt-8 text-center text-sm text-gray-500">© 2025 LoanAI — All rights reserved.</div>
+    <div class="mt-8 text-center text-sm text-gray-500">
+      © 2025 LoanAI — All rights reserved.
+    </div>
   </footer>
 
-  <!-- FLOATING CHATBOT BUTTON -->
+  <!-- NEW: FLOATING AI CHATBOT BUTTON -->
   <a href="AIchatBot.html"
-    class="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-gradient-to-r from-primary to-accent flex items-center justify-center shadow-neon cursor-pointer animate-floatbot z-50">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" fill="black" viewBox="0 0 24 24" class="w-7 h-7">
-      <path d="M12 2C6.48 2 2 5.58 2 10c0 2.21 1.02 4.21 2.72 5.74-.1.82-.46 2.19-1.39 3.37-.23.29-.02.72.34.72 1.37 0 3.28-.88 4.31-1.51C9.41 18.74 10.67 19 12 19c5.52 0 10-3.58 10-8s-4.48-9-10-9z"/>
+    class="fixed bottom-6 right-6 w-16 h-16 rounded-full 
+           bg-gradient-to-r from-primary to-accent 
+           flex items-center justify-center shadow-neon 
+           cursor-pointer chatbot-float chatbot-hover z-50">
+
+    <!-- Futuristic robot icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+         class="w-9 h-9 text-black">
+      <path fill="currentColor"
+            d="M12 1a1 1 0 0 1 1 1v1h3a2 2 0 0 1 2 2v6a7 7 0 0 1-14 0V5a2 2 0 0 1 2-2h3V2a1 1 0 0 1 1-1Zm-4 6a1 1 0 1 0 0 2a1 1 0 0 0 0-2Zm8 0a1 1 0 1 0 0 2a1 1 0 0 0 0-2Z"/>
     </svg>
   </a>
 
-  <!-- Small script for smooth scroll and micro-interactions -->
+  <!-- Smooth scroll + hover effects -->
   <script>
-    // Smooth scroll for internal links
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
       a.addEventListener('click', e=>{
         const href=a.getAttribute('href');
@@ -316,7 +419,7 @@
       })
     });
 
-    // Tiny hover scale for feature cards
+    // Hover animation for cards
     document.querySelectorAll('.hover\\:scale-102').forEach(el=>{
       el.addEventListener('mouseenter', ()=> el.style.transform='scale(1.02)');
       el.addEventListener('mouseleave', ()=> el.style.transform='scale(1)');
