@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Settings — LoanAI Admin</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#0ea5ff",
+            electric: "#38bdf8",
+            success: "#22c55e",
+            warning: "#facc15",
+            danger: "#ef4444",
+            accent: "#0f172a"
+          },
+          boxShadow: {
+            neon: "0 8px 40px rgba(14,165,255,0.35), 0 4px 16px rgba(56,189,248,0.18)"
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      font-family: Inter, ui-sans-serif, system-ui;
+      background: radial-gradient(circle at top, rgba(14,165,255,0.15), transparent 65%), #000;
+    }
+
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
+      backdrop-filter: blur(12px);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeUp { animation: fadeUp .85s ease-out both; }
+  </style>
+</head>
+
+<body class="text-gray-200">
+
+  <div class="flex min-h-screen">
+
+    <!-- Sidebar -->
+    <aside class="w-64 glass border-r border-blue-800/40 p-6 hidden md:block">
+
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-12 h-12 rounded-xl bg-primary text-black flex items-center justify-center font-bold shadow-neon">
+          A
+        </div>
+        <h2 class="text-xl font-bold">LoanAI Admin</h2>
+      </div>
+
+      <nav class="space-y-3 text-sm">
+        <a href="admin-dashboard.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Dashboard</a>
+        <a href="applications-list.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Applications</a>
+        <a href="chat-logs.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Chat Logs</a>
+        <a href="analytics-dashboard.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Analytics</a>
+        <a href="worker-performance.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Worker Performance</a>
+        <a href="admin-settings.html" class="block px-3 py-2 bg-primary text-black rounded-lg shadow-neon font-semibold">Settings</a>
+        <a href="user-management.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">User Management</a>
+        <a href="admin-activity.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Activity Log</a>
+        <a href="system-logs.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">System Logs</a>
+      </nav>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 p-8">
+
+      <!-- Header -->
+      <div class="mb-10 animate-fadeUp">
+        <h1 class="text-3xl font-extrabold text-white">Admin Settings</h1>
+        <p class="text-gray-400">Manage your admin account and system preferences</p>
+      </div>
+
+      <!-- SETTINGS GRID -->
+      <div class="grid lg:grid-cols-2 gap-8 animate-fadeUp">
+
+        <!-- PROFILE SETTINGS -->
+        <div class="glass p-6 rounded-2xl border border-blue-800/40 shadow-neon">
+          <h2 class="text-xl font-bold mb-4">Profile Settings</h2>
+
+          <div class="space-y-4">
+
+            <div>
+              <label class="text-sm text-gray-400">Full Name</label>
+              <input type="text" value="Admin User"
+                class="w-full mt-2 p-3 rounded-xl bg-transparent border border-gray-700 outline-none focus:ring-2 focus:ring-primary">
+            </div>
+
+            <div>
+              <label class="text-sm text-gray-400">Email</label>
+              <input type="email" value="admin@loanai.com"
+                class="w-full mt-2 p-3 rounded-xl bg-transparent border border-gray-700 outline-none focus:ring-2 focus:ring-primary">
+            </div>
+
+            <div>
+              <label class="text-sm text-gray-400">Phone</label>
+              <input type="text" value="+91 98765 43210"
+                class="w-full mt-2 p-3 rounded-xl bg-transparent border border-gray-700 outline-none focus:ring-2 focus:ring-primary">
+            </div>
+
+            <button class="w-full mt-4 py-3 bg-primary text-black rounded-xl font-semibold shadow-neon hover:brightness-110">
+              Save Changes
+            </button>
+
+          </div>
+        </div>
+
+        <!-- SECURITY SETTINGS -->
+        <div class="glass p-6 rounded-2xl border border-blue-800/40 shadow-neon">
+          <h2 class="text-xl font-bold mb-4">Security Settings</h2>
+
+          <div class="space-y-4">
+
+            <div>
+              <label class="text-sm text-gray-400">Current Password</label>
+              <input type="password" placeholder="••••••••"
+                class="w-full mt-2 p-3 rounded-xl bg-transparent border border-gray-700 outline-none focus:ring-2 focus:ring-primary">
+            </div>
+
+            <div>
+              <label class="text-sm text-gray-400">New Password</label>
+              <input type="password" placeholder="••••••••"
+                class="w-full mt-2 p-3 rounded-xl bg-transparent border border-gray-700 outline-none focus:ring-2 focus:ring-primary">
+            </div>
+
+            <div>
+              <label class="text-sm text-gray-400">Confirm New Password</label>
+              <input type="password" placeholder="••••••••"
+                class="w-full mt-2 p-3 rounded-xl bg-transparent border border-gray-700 outline-none focus:ring-2 focus:ring-primary">
+            </div>
+
+            <button class="w-full mt-4 py-3 bg-success text-black rounded-xl font-semibold shadow-neon hover:brightness-110">
+              Update Password
+            </button>
+
+          </div>
+        </div>
+
+        <!-- NOTIFICATIONS SETTINGS -->
+        <div class="glass p-6 rounded-2xl border border-blue-800/40 shadow-neon">
+          <h2 class="text-xl font-bold mb-4">Notifications</h2>
+
+          <div class="space-y-4 text-sm">
+
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" checked class="w-5 h-5 accent-primary">
+              Enable email notifications
+            </label>
+
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" checked class="w-5 h-5 accent-primary">
+              Alerts for new applications
+            </label>
+
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" class="w-5 h-5 accent-primary">
+              Alerts for rejected KYC
+            </label>
+
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" class="w-5 h-5 accent-primary">
+              Daily activity summary
+            </label>
+
+          </div>
+        </div>
+
+        <!-- SYSTEM PREFERENCES -->
+        <div class="glass p-6 rounded-2xl border border-blue-800/40 shadow-neon">
+          <h2 class="text-xl font-bold mb-4">System Preferences</h2>
+
+          <div class="space-y-4 text-sm">
+
+            <div>
+              <p class="text-gray-400 text-sm mb-1">Dashboard Theme</p>
+              <select class="w-full p-3 rounded-xl bg-transparent border border-gray-700 outline-none focus:ring-2 focus:ring-primary">
+                <option class="text-black">Dark Mode (Active)</option>
+                <option class="text-black">Light Mode</option>
+              </select>
+            </div>
+
+            <div>
+              <p class="text-gray-400 text-sm mb-1">Default Analytics Range</p>
+              <select class="w-full p-3 rounded-xl bg-transparent border border-gray-700 outline-none focus:ring-2 focus:ring-primary">
+                <option class="text-black">Last 7 Days</option>
+                <option class="text-black">Last 30 Days</option>
+                <option class="text-black">This Year</option>
+              </select>
+            </div>
+
+            <div>
+              <p class="text-gray-400 text-sm mb-1">Auto-Logout Timer</p>
+              <select class="w-full p-3 rounded-xl bg-transparent border border-gray-700 outline-none focus:ring-2 focus:ring-primary">
+                <option class="text-black">15 minutes</option>
+                <option class="text-black">30 minutes</option>
+                <option class="text-black">60 minutes</option>
+              </select>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+</body>
+</html>

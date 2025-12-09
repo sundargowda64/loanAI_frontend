@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loan Offers — LoanAI</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#0ea5ff",
+            electric: "#38bdf8",
+            accent: "#0f172a",
+            success: "#22c55e"
+          },
+          boxShadow: {
+            neon: "0 8px 46px rgba(14,165,255,0.35), 0 4px 18px rgba(56,189,248,0.18)"
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body { font-family: Inter, ui-sans-serif, system-ui; }
+
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      backdrop-filter: blur(12px);
+    }
+
+    @keyframes floatUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-floatUp {
+      animation: floatUp .85s ease-out both;
+    }
+  </style>
+
+</head>
+
+<body class="bg-black text-gray-200 min-h-screen py-14 px-6 flex justify-center">
+
+  <div class="w-full max-w-5xl">
+
+    <!-- Page Header -->
+    <div class="text-center mb-10 animate-floatUp">
+      <h1 class="text-3xl font-extrabold neon-text">Your Personalized Loan Offers</h1>
+      <p class="text-gray-400 mt-2">
+        Based on your eligibility score and financial profile, here are the top loan recommendations.
+      </p>
+    </div>
+
+    <!-- Offers Container -->
+    <div class="space-y-10">
+
+      <!-- Offer Card 1 -->
+      <div class="glass p-8 rounded-2xl border border-blue-800/40 shadow-neon animate-floatUp">
+
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+
+          <!-- Bank Logo & Name -->
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-xl bg-primary flex items-center justify-center text-black font-bold shadow-neon">
+              B1
+            </div>
+            <div>
+              <h2 class="text-xl font-bold text-white">BlueBank Finance</h2>
+              <p class="text-gray-400 text-sm">AI-Matched Best Overall Offer</p>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <button onclick="applyLoan('BlueBank Finance')"
+                  class="px-6 py-3 bg-primary text-black rounded-xl font-semibold shadow-neon hover:brightness-110 transition">
+            Apply Now
+          </button>
+        </div>
+
+        <!-- Offer Details -->
+        <div class="grid md:grid-cols-4 gap-6 mt-8">
+
+          <div class="p-4 bg-black/40 border border-blue-800/30 rounded-xl text-center">
+            <p class="text-gray-400 text-sm">Loan Amount</p>
+            <p class="text-electric text-xl font-bold">₹ 4,80,000</p>
+          </div>
+
+          <div class="p-4 bg-black/40 border border-blue-800/30 rounded-xl text-center">
+            <p class="text-gray-400 text-sm">Interest Rate</p>
+            <p class="text-success text-xl font-bold">10.9%</p>
+          </div>
+
+          <div class="p-4 bg-black/40 border border-blue-800/30 rounded-xl text-center">
+            <p class="text-gray-400 text-sm">Tenure</p>
+            <p class="text-primary text-xl font-bold">36 months</p>
+          </div>
+
+          <div class="p-4 bg-black/40 border border-blue-800/30 rounded-xl text-center">
+            <p class="text-gray-400 text-sm">EMI</p>
+            <p class="text-success text-xl font-bold">₹ 8,720</p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Offer Card 2 -->
+      <div class="glass p-8 rounded-2xl border border-blue-800/40 shadow-neon animate-floatUp">
+
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+
+          <!-- Bank Logo -->
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-xl bg-electric flex items-center justify-center text-black font-bold shadow-neon">
+              B2
+            </div>
+            <div>
+              <h2 class="text-xl font-bold text-white">Skyline Bank</h2>
+              <p class="text-gray-400 text-sm">Lowest EMI Option</p>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <button onclick="applyLoan('Skyline Bank')"
+                  class="px-6 py-3 bg-primary text-black rounded-xl font-semibold shadow-neon hover:brightness-110 transition">
+            Apply Now
+          </button>
+        </div>
+
+        <!-- Offer Details -->
+        <div class="grid md:grid-cols-4 gap-6 mt-8">
+
+          <div class="p-4 bg-black/40 border border-blue-800/30 rounded-xl text-center">
+            <p class="text-gray-400 text-sm">Loan Amount</p>
+            <p class="text-electric text-xl font-bold">₹ 4,50,000</p>
+          </div>
+
+          <div class="p-4 bg-black/40 border border-blue-800/30 rounded-xl text-center">
+            <p class="text-gray-400 text-sm">Interest Rate</p>
+            <p class="text-success text-xl font-bold">11.5%</p>
+          </div>
+
+          <div class="p-4 bg-black/40 border border-blue-800/30 rounded-xl text-center">
+            <p class="text-gray-400 text-sm">Tenure</p>
+            <p class="text-primary text-xl font-bold">48 months</p>
+          </div>
+
+          <div class="p-4 bg-black/40 border border-blue-800/30 rounded-xl text-center">
+            <p class="text-gray-400 text-sm">EMI</p>
+            <p class="text-success text-xl font-bold">₹ 7,320</p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Offer Card 3 -->
+      <div class="glass p-8 rounded-2xl border border-blue-800/40 shadow-neon animate-floatUp">
+
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-xl bg-blue-900 flex items-center justify-center text-electric font-bold shadow-neon">
+              B3
+            </div>
+            <div>
+              <h2 class="text-xl font-bold text-white">Metro Capital</h2>
+              <p class="text-gray-400 text-sm">Flexible Tenure Plan</p>
+            </div>
+          </div>
+
+          <button onclick="applyLoan('Metro Capital')"
+                  class="px-6 py-3 bg-primary text-black rounded-xl font-semibold shadow-neon hover:brightness-110 transition">
+            Apply Now
+          </button>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-6 mt-8">
+
+          <div class="p-4 bg-black/40 border border-blue-800/30 rounded-xl text-center">
+            <p class="text-gray-400 text-sm">Loan Amount</p>
+            <p class="text-electric text-xl font-bold">₹ 5,00,000</p>
+          </div>
+
+          <div class="p-4 bg-black/40 border border-blue-800/30 rounded-xl text-center">
+            <p class="text-gray-400 text-sm">Interest Rate</p>
+            <p class="text-success text-xl font-bold">12.2%</p>
+          </div>
+
+          <div class="p-4 bg-black/40 border border-blue-800/30 rounded-xl text-center">
+            <p class="text-gray-400 text-sm">Tenure</p>
+            <p class="text-primary text-xl font-bold">24–60 mo</p>
+          </div>
+
+          <div class="p-4 bg-black/40 border border-blue-800/30 rounded-xl text-center">
+            <p class="text-gray-400 text-sm">EMI</p>
+            <p class="text-success text-xl font-bold">₹ 9,200</p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    function applyLoan(bank){
+      alert("Redirecting to loan application for " + bank + "...");
+      window.location.href = "loan-status.html";
+    }
+  </script>
+
+</body>
+</html>

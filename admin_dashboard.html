@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — LoanAI</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#0ea5ff",
+            electric: "#38bdf8",
+            success: "#22c55e",
+            warning: "#facc15",
+            danger: "#ef4444",
+            accent: "#0f172a",
+          },
+          boxShadow: {
+            neon: "0 8px 46px rgba(14,165,255,0.38), 0 4px 18px rgba(56,189,248,0.22)"
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      font-family: Inter, ui-sans-serif, system-ui;
+      background: radial-gradient(circle at top, rgba(14,165,255,0.12), transparent 65%), #000;
+    }
+
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
+      backdrop-filter: blur(12px);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-fadeUp { animation: fadeUp .85s ease-out both; }
+  </style>
+</head>
+
+<body class="text-gray-200">
+
+  <!-- Layout -->
+  <div class="flex min-h-screen">
+
+    <!-- Sidebar -->
+    <aside class="w-64 glass border-r border-blue-800/40 p-6 hidden md:block">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-12 h-12 rounded-xl bg-primary flex items-center justify-center text-black font-bold shadow-neon">
+          A
+        </div>
+        <h2 class="text-xl font-bold">LoanAI Admin</h2>
+      </div>
+
+      <nav class="space-y-3 text-sm">
+        <a href="admin-dashboard.html" class="block px-3 py-2 rounded-lg bg-primary text-black font-semibold shadow-neon">Dashboard</a>
+        <a href="applications-list.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Applications</a>
+        <a href="chat-logs.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Chat Logs</a>
+        <a href="analytics-dashboard.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Analytics</a>
+        <a href="worker-performance.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Worker Performance</a>
+        <a href="admin-settings.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Settings</a>
+        <a href="user-management.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">User Management</a>
+        <a href="admin-activity.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Activity Log</a>
+        <a href="system-logs.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">System Logs</a>
+      </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 p-8">
+
+      <!-- Header -->
+      <div class="flex justify-between items-center mb-10 animate-fadeUp">
+        <div>
+          <h1 class="text-3xl font-extrabold text-white">Dashboard</h1>
+          <p class="text-gray-400">AI-driven loan system analytics</p>
+        </div>
+
+        <button class="px-4 py-2 bg-danger hover:brightness-110 rounded-lg font-semibold"
+                onclick="logout()">
+          Logout
+        </button>
+      </div>
+
+      <!-- KPI Cards -->
+      <div class="grid md:grid-cols-4 gap-6 mb-10 animate-fadeUp">
+
+        <div class="glass p-6 rounded-2xl border border-blue-800/40 shadow-neon text-center">
+          <p class="text-gray-400 text-sm">Total Applications</p>
+          <p class="text-primary text-3xl font-bold mt-1">12,540</p>
+        </div>
+
+        <div class="glass p-6 rounded-2xl border border-blue-800/40 shadow-neon text-center">
+          <p class="text-gray-400 text-sm">Approved</p>
+          <p class="text-success text-3xl font-bold mt-1">9,210</p>
+        </div>
+
+        <div class="glass p-6 rounded-2xl border border-blue-800/40 shadow-neon text-center">
+          <p class="text-gray-400 text-sm">Rejected</p>
+          <p class="text-danger text-3xl font-bold mt-1">1,340</p>
+        </div>
+
+        <div class="glass p-6 rounded-2xl border border-blue-800/40 shadow-neon text-center">
+          <p class="text-gray-400 text-sm">Pending</p>
+          <p class="text-warning text-3xl font-bold mt-1">1,990</p>
+        </div>
+
+      </div>
+
+      <!-- Charts + Stats Row -->
+      <div class="grid lg:grid-cols-2 gap-8 animate-fadeUp">
+
+        <!-- Chart Placeholder -->
+        <div class="glass p-6 rounded-2xl border border-blue-800/40 shadow-neon">
+          <h2 class="text-xl font-bold mb-4">Loan Volume (Monthly)</h2>
+
+          <div class="w-full h-64 flex items-center justify-center text-gray-500 border border-blue-800/30 rounded-xl">
+            <span>Chart Placeholder</span>
+          </div>
+        </div>
+
+        <!-- Recent Applications -->
+        <div class="glass p-6 rounded-2xl border border-blue-800/40 shadow-neon">
+          <h2 class="text-xl font-bold mb-4">Recent Applications</h2>
+
+          <div class="space-y-4 text-sm">
+
+            <div class="flex justify-between items-center border-b border-gray-800 pb-3">
+              <span class="text-gray-300">Ravi Kumar</span>
+              <span class="text-primary font-semibold">₹ 3,00,000</span>
+            </div>
+
+            <div class="flex justify-between items-center border-b border-gray-800 pb-3">
+              <span class="text-gray-300">Sneha Verma</span>
+              <span class="text-success font-semibold">Approved</span>
+            </div>
+
+            <div class="flex justify-between items-center border-b border-gray-800 pb-3">
+              <span class="text-gray-300">John Mathew</span>
+              <span class="text-danger font-semibold">Rejected</span>
+            </div>
+
+            <div class="flex justify-between items-center">
+              <span class="text-gray-300">Priya Sharma</span>
+              <span class="text-warning font-semibold">Pending</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <script>
+    function logout() {
+      alert("Admin logged out.");
+      window.location.href = "admin-login.html";
+    }
+  </script>
+
+</body>
+</html>

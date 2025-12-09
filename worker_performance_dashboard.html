@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Worker Performance — LoanAI Admin</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#0ea5ff",
+            electric: "#38bdf8",
+            success: "#22c55e",
+            warning: "#facc15",
+            danger: "#ef4444",
+          },
+          boxShadow: {
+            neon: "0 8px 40px rgba(14,165,255,0.35), 0 4px 16px rgba(56,189,248,0.18)"
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      font-family: Inter, ui-sans-serif, system-ui;
+      background: radial-gradient(circle at top, rgba(14,165,255,0.12), transparent 65%), #000;
+    }
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
+      backdrop-filter: blur(11px);
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeUp {
+      animation: fadeUp .85s ease-out both;
+    }
+  </style>
+
+</head>
+
+<body class="text-gray-200">
+
+  <div class="flex min-h-screen">
+
+    <!-- Sidebar -->
+    <aside class="w-64 glass border-r border-blue-800/40 p-6 hidden md:block">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-12 h-12 rounded-xl bg-primary text-black flex items-center justify-center font-bold shadow-neon">
+          A
+        </div>
+        <h2 class="text-xl font-bold">LoanAI Admin</h2>
+      </div>
+
+      <nav class="space-y-3 text-sm">
+        <a href="admin-dashboard.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Dashboard</a>
+        <a href="applications-list.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Applications</a>
+        <a href="chat-logs.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Chat Logs</a>
+        <a href="analytics-dashboard.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Analytics</a>
+        <a href="worker-performance.html" class="block px-3 py-2 bg-primary text-black rounded-lg shadow-neon font-semibold">Worker Performance</a>
+        <a href="admin-settings.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Settings</a>
+        <a href="user-management.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">User Management</a>
+        <a href="admin-activity.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Activity Log</a>
+        <a href="system-logs.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">System Logs</a>
+      </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 p-8">
+
+      <!-- Page Header -->
+      <div class="mb-10 animate-fadeUp">
+        <h1 class="text-3xl font-extrabold text-white">Worker Performance</h1>
+        <p class="text-gray-400">Monitor productivity, efficiency, and quality of review agents</p>
+      </div>
+
+      <!-- KPIs -->
+      <div class="grid md:grid-cols-4 gap-6 mb-10 animate-fadeUp">
+
+        <div class="glass p-6 rounded-xl border border-blue-800/40 shadow-neon text-center">
+          <p class="text-gray-400 text-sm">Total Agents</p>
+          <p class="text-primary text-3xl font-bold mt-1">86</p>
+        </div>
+
+        <div class="glass p-6 rounded-xl border border-blue-800/40 shadow-neon text-center">
+          <p class="text-gray-400 text-sm">Avg Cases/Day</p>
+          <p class="text-electric text-3xl font-bold mt-1">42</p>
+        </div>
+
+        <div class="glass p-6 rounded-xl border border-blue-800/40 shadow-neon text-center">
+          <p class="text-gray-400 text-sm">Avg Quality Score</p>
+          <p class="text-success text-3xl font-bold mt-1">94%</p>
+        </div>
+
+        <div class="glass p-6 rounded-xl border border-blue-800/40 shadow-neon text-center">
+          <p class="text-gray-400 text-sm">Avg Resolution Time</p>
+          <p class="text-warning text-3xl font-bold mt-1">4.3 hrs</p>
+        </div>
+
+      </div>
+
+      <!-- Main Charts -->
+      <div class="grid lg:grid-cols-2 gap-8 mb-10 animate-fadeUp">
+
+        <!-- Worker Productivity Chart -->
+        <div class="glass p-6 rounded-2xl border border-blue-800/40 shadow-neon">
+          <h2 class="text-xl font-bold mb-4">Productivity Trend</h2>
+          <div class="w-full h-64 border border-blue-800/30 rounded-xl flex items-center justify-center text-gray-500">
+            Line Chart Placeholder
+          </div>
+        </div>
+
+        <!-- Quality Score Chart -->
+        <div class="glass p-6 rounded-2xl border border-blue-800/40 shadow-neon">
+          <h2 class="text-xl font-bold mb-4">Quality Score</h2>
+          <div class="w-full h-64 border border-blue-800/30 rounded-xl flex items-center justify-center text-gray-500">
+            Bar Chart Placeholder
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Leaderboard -->
+      <div class="glass p-6 rounded-2xl border border-blue-800/40 shadow-neon animate-fadeUp">
+
+        <h2 class="text-xl font-bold mb-4">Top Performing Agents</h2>
+
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-gray-400 border-b border-gray-700">
+              <th class="text-left py-3">Agent</th>
+              <th class="text-left py-3">Cases Handled</th>
+              <th class="text-left py-3">Quality Score</th>
+              <th class="text-left py-3">Efficiency</th>
+            </tr>
+          </thead>
+
+          <tbody class="text-gray-300">
+
+            <tr class="border-b border-gray-800 hover:bg-white/5 transition">
+              <td class="py-3">Ananya Singh</td>
+              <td class="py-3">156</td>
+              <td class="py-3 text-success font-semibold">98%</td>
+              <td class="py-3 text-electric font-semibold">High</td>
+            </tr>
+
+            <tr class="border-b border-gray-800 hover:bg-white/5 transition">
+              <td class="py-3">Rahul Mehta</td>
+              <td class="py-3">148</td>
+              <td class="py-3 text-success font-semibold">95%</td>
+              <td class="py-3 text-electric font-semibold">High</td>
+            </tr>
+
+            <tr class="border-b border-gray-800 hover:bg-white/5 transition">
+              <td class="py-3">Priya Sharma</td>
+              <td class="py-3">139</td>
+              <td class="py-3 text-warning font-semibold">89%</td>
+              <td class="py-3 text-primary font-semibold">Medium</td>
+            </tr>
+
+            <tr class="hover:bg-white/5 transition">
+              <td class="py-3">Saurav Kulkarni</td>
+              <td class="py-3">121</td>
+              <td class="py-3 text-danger font-semibold">76%</td>
+              <td class="py-3 text-warning font-semibold">Low</td>
+            </tr>
+
+          </tbody>
+        </table>
+
+      </div>
+
+    </main>
+
+  </div>
+
+</body>
+</html>

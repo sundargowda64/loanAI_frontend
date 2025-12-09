@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Profile — LoanAI</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#0ea5ff",
+            electric: "#38bdf8",
+            success: "#22c55e",
+            warning: "#facc15",
+            danger: "#ef4444",
+          },
+          boxShadow: {
+            neon: "0 8px 45px rgba(14,165,255,0.35), 0 4px 18px rgba(56,189,248,0.2)"
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: Inter, ui-sans-serif;
+      background: radial-gradient(circle at top, rgba(14,165,255,0.15), transparent 65%), #000;
+      color: #d1d5db;
+    }
+
+    .glass {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(14px);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeUp {
+      animation: fadeUp .85s ease-out both;
+    }
+  </style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="glass border-b border-blue-900/40 backdrop-blur-xl fixed top-0 left-0 right-0 z-50 p-4 flex justify-between items-center">
+  <h1 class="text-primary font-extrabold text-xl">LoanAI</h1>
+
+  <nav class="space-x-6 hidden md:block">
+    <a href="index.html" class="hover:text-primary">Home</a>
+    <a href="loan-status.html" class="hover:text-primary">Loan Status</a>
+    <a href="offers.html" class="hover:text-primary">Offers</a>
+    <a href="profile.html" class="text-primary font-semibold">Profile</a>
+  </nav>
+
+  <button class="md:hidden text-primary text-2xl">☰</button>
+</header>
+
+
+<!-- MAIN CONTENT -->
+<main class="pt-28 pb-20 px-6 md:px-20 max-w-7xl mx-auto animate-fadeUp">
+
+  <h2 class="text-3xl font-extrabold text-white mb-8">My Profile</h2>
+
+  <div class="grid lg:grid-cols-3 gap-10">
+
+    <!-- LEFT: PROFILE SUMMARY -->
+    <div class="glass border border-blue-800/40 rounded-2xl p-8 shadow-neon">
+
+      <div class="flex flex-col items-center">
+        <div class="w-28 h-28 rounded-full bg-primary text-black flex items-center justify-center text-3xl font-bold shadow-neon">
+          R
+        </div>
+
+        <h3 class="text-xl text-white font-semibold mt-4">Ravi Kumar</h3>
+        <p class="text-gray-400 text-sm">ravi@example.com</p>
+      </div>
+
+      <div class="mt-8 space-y-3 text-sm">
+        <p><strong class="text-electric">Account Created:</strong> Jan 2024</p>
+        <p><strong class="text-electric">Phone:</strong> +91 98765 43210</p>
+        <p><strong class="text-electric">Loan Status:</strong> Active</p>
+        <p><strong class="text-electric">KYC:</strong> <span class="text-success font-semibold">Verified</span></p>
+      </div>
+
+    </div>
+
+
+    <!-- RIGHT: SETTINGS -->
+    <div class="lg:col-span-2 space-y-10">
+
+      <!-- PERSONAL INFO -->
+      <section class="glass border border-blue-800/40 p-8 rounded-2xl shadow-neon">
+        <h3 class="text-2xl font-bold text-white mb-6">Personal Information</h3>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <label class="text-sm text-gray-400">Full Name</label>
+            <input type="text" value="Ravi Kumar" class="w-full mt-2 p-3 bg-transparent border border-gray-700 rounded-xl focus:ring-2 focus:ring-primary outline-none">
+          </div>
+
+          <div>
+            <label class="text-sm text-gray-400">Email</label>
+            <input type="email" value="ravi@example.com" class="w-full mt-2 p-3 bg-transparent border border-gray-700 rounded-xl focus:ring-2 focus:ring-primary outline-none">
+          </div>
+
+          <div>
+            <label class="text-sm text-gray-400">Phone</label>
+            <input type="text" value="+91 98765 43210" class="w-full mt-2 p-3 bg-transparent border border-gray-700 rounded-xl focus:ring-2 focus:ring-primary outline-none">
+          </div>
+
+          <div>
+            <label class="text-sm text-gray-400">Address</label>
+            <input type="text" placeholder="Enter your address" class="w-full mt-2 p-3 bg-transparent border border-gray-700 rounded-xl focus:ring-2 focus:ring-primary outline-none">
+          </div>
+        </div>
+
+        <button class="mt-6 px-6 py-3 bg-primary text-black rounded-xl font-semibold shadow-neon hover:brightness-110">
+          Save Changes
+        </button>
+      </section>
+
+
+      <!-- CHANGE PASSWORD -->
+      <section class="glass border border-blue-800/40 p-8 rounded-2xl shadow-neon">
+        <h3 class="text-2xl font-bold text-white mb-6">Change Password</h3>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <label class="text-sm text-gray-400">Current Password</label>
+            <input type="password" placeholder="••••••••" class="w-full mt-2 p-3 bg-transparent border border-gray-700 rounded-xl focus:ring-2 focus:ring-primary outline-none">
+          </div>
+
+          <div>
+            <label class="text-sm text-gray-400">New Password</label>
+            <input type="password" placeholder="••••••••" class="w-full mt-2 p-3 bg-transparent border border-gray-700 rounded-xl focus:ring-2 focus:ring-primary outline-none">
+          </div>
+
+          <div>
+            <label class="text-sm text-gray-400">Confirm New Password</label>
+            <input type="password" placeholder="••••••••" class="w-full mt-2 p-3 bg-transparent border border-gray-700 rounded-xl focus:ring-2 focus:ring-primary outline-none">
+          </div>
+        </div>
+
+        <button class="mt-6 px-6 py-3 bg-success text-black rounded-xl font-semibold hover:brightness-110">
+          Update Password
+        </button>
+      </section>
+
+
+      <!-- DELETE ACCOUNT -->
+      <section class="glass border border-blue-800/40 p-8 rounded-2xl shadow-neon">
+        <h3 class="text-2xl font-bold text-warning mb-4">Danger Zone</h3>
+
+        <p class="text-gray-400 text-sm mb-4">Deleting your account will permanently remove your data, loan history, and KYC details.</p>
+
+        <button class="px-6 py-3 bg-danger text-black rounded-xl font-semibold hover:brightness-110">
+          Delete My Account
+        </button>
+      </section>
+
+    </div>
+
+  </div>
+
+</main>
+
+</body>
+</html>

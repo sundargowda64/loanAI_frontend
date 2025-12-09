@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat Logs — LoanAI Admin</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#0ea5ff",
+            electric: "#38bdf8",
+            success: "#22c55e",
+            warning: "#facc15",
+            danger: "#ef4444"
+          },
+          boxShadow: {
+            neon: "0 8px 40px rgba(14,165,255,0.35), 0 4px 16px rgba(56,189,248,0.18)"
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      font-family: Inter, ui-sans-serif, system-ui;
+      background: radial-gradient(circle at top, rgba(14,165,255,0.12), transparent 65%), #000;
+    }
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
+      backdrop-filter: blur(12px);
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeUp {
+      animation: fadeUp .8s ease-out both;
+    }
+  </style>
+</head>
+
+<body class="text-gray-200">
+
+  <div class="flex min-h-screen">
+
+    <!-- Sidebar -->
+    <aside class="w-64 glass border-r border-blue-800/40 p-6 hidden md:block">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-12 h-12 rounded-xl bg-primary text-black flex items-center justify-center font-bold shadow-neon">
+          A
+        </div>
+        <h2 class="text-xl font-bold">LoanAI Admin</h2>
+      </div>
+
+      <nav class="space-y-3 text-sm">
+        <a href="admin-dashboard.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Dashboard</a>
+        <a href="applications-list.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Applications</a>
+        <a href="chat-logs.html" class="block px-3 py-2 bg-primary text-black rounded-lg shadow-neon font-semibold">Chat Logs</a>
+        <a href="analytics-dashboard.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Analytics</a>
+        <a href="worker-performance.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Worker Performance</a>
+        <a href="admin-settings.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Settings</a>
+        <a href="user-management.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">User Management</a>
+        <a href="admin-activity.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">Activity Log</a>
+        <a href="system-logs.html" class="block px-3 py-2 hover:bg-white/5 rounded-lg">System Logs</a>
+      </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 p-8">
+
+      <!-- Header -->
+      <div class="mb-10 animate-fadeUp">
+        <h1 class="text-3xl font-extrabold text-white">Chat Logs</h1>
+        <p class="text-gray-400">Review AI–User conversations</p>
+      </div>
+
+      <!-- Search + Filter -->
+      <div class="glass border border-blue-800/40 p-6 rounded-2xl shadow-neon mb-8 animate-fadeUp flex flex-col md:flex-row gap-4 justify-between items-center">
+        
+        <input
+          id="chatSearch"
+          type="text"
+          placeholder="Search chats by user or message..."
+          class="w-full md:w-1/2 p-3 rounded-lg bg-transparent border border-gray-700 focus:ring-2 focus:ring-primary outline-none"
+        >
+
+        <select id="dateFilter"
+                class="w-full md:w-1/4 p-3 rounded-lg bg-transparent border border-gray-700 text-gray-300 focus:ring-2 focus:ring-primary outline-none">
+          <option value="all" class="text-black">All Time</option>
+          <option value="today" class="text-black">Today</option>
+          <option value="week" class="text-black">Last 7 Days</option>
+        </select>
+
+      </div>
+
+      <!-- Two Column Layout -->
+      <div class="grid lg:grid-cols-3 gap-8 animate-fadeUp">
+
+        <!-- USERS LIST -->
+        <div class="glass border border-blue-800/40 p-6 rounded-2xl shadow-neon">
+
+          <h2 class="text-xl font-bold mb-4">Users</h2>
+
+          <div id="userList" class="space-y-3 text-sm">
+
+            <button onclick="openChat('Ravi Kumar')" class="w-full text-left p-3 rounded-lg hover:bg-white/5 transition">
+              Ravi Kumar
+            </button>
+
+            <button onclick="openChat('Sneha Verma')" class="w-full text-left p-3 rounded-lg hover:bg-white/5 transition">
+              Sneha Verma
+            </button>
+
+            <button onclick="openChat('John Mathew')" class="w-full text-left p-3 rounded-lg hover:bg-white/5 transition">
+              John Mathew
+            </button>
+
+            <button onclick="openChat('Priya Sharma')" class="w-full text-left p-3 rounded-lg hover:bg-white/5 transition">
+              Priya Sharma
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- CHAT VIEWER -->
+        <div class="lg:col-span-2 glass border border-blue-800/40 p-6 rounded-2xl shadow-neon">
+
+          <h2 id="chatUserName" class="text-xl font-bold mb-4">Select a user to view chat</h2>
+
+          <div id="chatBox" class="h-[480px] overflow-y-auto space-y-6 pr-2">
+
+            <!-- Chat Bubbles will appear here via JS -->
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById("chatBox");
+    const chatUserName = document.getElementById("chatUserName");
+
+    // Sample chat data
+    const chats = {
+      "Ravi Kumar": [
+        { from: "user", text: "Hi, I want to check my eligibility." },
+        { from: "ai", text: "Sure. Please share your monthly income." },
+        { from: "user", text: "I earn ₹50,000 per month." },
+        { from: "ai", text: "Great! You are eligible for a loan of ₹4.8 lakhs." }
+      ],
+
+      "Sneha Verma": [
+        { from: "user", text: "How do I upload documents?" },
+        { from: "ai", text: "Go to the KYC section and upload Aadhaar, PAN, and income proof." }
+      ],
+
+      "John Mathew": [
+        { from: "user", text: "Why was my loan rejected?" },
+        { from: "ai", text: "Based on the credit model, your disposable income was below the required threshold." }
+      ],
+
+      "Priya Sharma": [
+        { from: "user", text: "What is the interest rate for 5 lakh loan?" },
+        { from: "ai", text: "Interest rates vary between 10–14% depending on profile." }
+      ]
+    };
+
+    function openChat(user) {
+      chatUserName.textContent = "Chat with " + user;
+      chatBox.innerHTML = "";
+
+      chats[user].forEach(msg => {
+        const bubble = document.createElement("div");
+
+        if(msg.from === "user") {
+          bubble.className = "p-3 rounded-xl bg-primary text-black max-w-[70%]";
+          bubble.textContent = msg.text;
+        } else {
+          bubble.className = "p-3 rounded-xl bg-gray-800 border border-blue-800/40 max-w-[70%] ml-auto text-gray-200";
+          bubble.textContent = msg.text;
+        }
+
+        chatBox.appendChild(bubble);
+      });
+
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+
+</body>
+</html>

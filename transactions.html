@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transaction History — LoanAI</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#0ea5ff",
+            electric: "#38bdf8",
+            success: "#22c55e",
+            pending: "#facc15",
+            danger: "#ef4444",
+          },
+          boxShadow: {
+            neon: "0 8px 46px rgba(14,165,255,0.35), 0 4px 18px rgba(56,189,248,0.2)"
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background: radial-gradient(circle at top, rgba(14,165,255,0.12), transparent 65%), #000;
+      font-family: Inter, ui-sans-serif;
+      color: #d1d5db;
+    }
+
+    .glass {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(12px);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-fadeUp {
+      animation: fadeUp .85s ease-out both;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="glass border-b border-blue-900/40 p-4 fixed top-0 left-0 right-0 z-50 flex justify-between items-center">
+  <h1 class="text-primary font-extrabold text-xl">LoanAI</h1>
+
+  <nav class="space-x-6 hidden md:block">
+    <a href="index.html" class="hover:text-primary">Home</a>
+    <a href="profile.html" class="hover:text-primary">Profile</a>
+    <a href="documents.html" class="hover:text-primary">Documents</a>
+    <a href="transactions.html" class="text-primary font-semibold">Transactions</a>
+  </nav>
+
+  <button class="md:hidden text-primary text-2xl">☰</button>
+</header>
+
+
+<!-- MAIN CONTENT -->
+<main class="pt-28 pb-20 px-6 md:px-20 max-w-6xl mx-auto animate-fadeUp">
+
+  <h2 class="text-3xl font-extrabold text-white mb-6">Transaction History</h2>
+  <p class="text-gray-400 mb-10">Review your EMI payments and dues</p>
+
+  <!-- SUMMARY CARDS -->
+  <div class="grid md:grid-cols-4 gap-6 mb-12">
+
+    <div class="glass p-6 rounded-2xl border border-blue-800/40 shadow-neon text-center">
+      <p class="text-gray-400 text-sm">Loan Amount</p>
+      <p class="text-primary text-2xl font-bold mt-2">₹4,80,000</p>
+    </div>
+
+    <div class="glass p-6 rounded-2xl border border-blue-800/40 shadow-neon text-center">
+      <p class="text-gray-400 text-sm">Interest Rate</p>
+      <p class="text-electric text-2xl font-bold mt-2">12.5%</p>
+    </div>
+
+    <div class="glass p-6 rounded-2xl border border-blue-800/40 shadow-neon text-center">
+      <p class="text-gray-400 text-sm">EMI Amount</p>
+      <p class="text-success text-2xl font-bold mt-2">₹11,450</p>
+    </div>
+
+    <div class="glass p-6 rounded-2xl border border-blue-800/40 shadow-neon text-center">
+      <p class="text-gray-400 text-sm">Next EMI Date</p>
+      <p class="text-warning text-2xl font-bold mt-2">14 Feb</p>
+    </div>
+
+  </div>
+
+  <!-- SEARCH + DOWNLOAD -->
+  <div class="glass p-6 border border-blue-800/40 rounded-2xl mb-10 shadow-neon flex flex-col md:flex-row gap-4 justify-between items-center">
+
+    <input id="transactionSearch" type="text" placeholder="Search by month or status..."
+           class="w-full md:w-1/2 p-3 bg-transparent border border-gray-700 rounded-xl focus:ring-2 focus:ring-primary outline-none">
+
+    <button class="px-6 py-3 bg-primary text-black rounded-xl shadow-neon hover:brightness-110">
+      Download Statement
+    </button>
+
+  </div>
+
+  <!-- TRANSACTION TABLE -->
+  <div class="glass p-6 border border-blue-800/40 rounded-2xl shadow-neon overflow-x-auto">
+
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="text-gray-400 border-b border-gray-700">
+          <th class="text-left py-3">Month</th>
+          <th class="text-left py-3">Amount</th>
+          <th class="text-left py-3">Status</th>
+          <th class="text-left py-3">Date Paid</th>
+        </tr>
+      </thead>
+
+      <tbody id="transactionTable" class="text-gray-300">
+
+        <tr class="border-b border-gray-800 hover:bg-white/5 transition">
+          <td class="py-3">January 2025</td>
+          <td>₹11,450</td>
+          <td><span class="text-success font-semibold">Paid</span></td>
+          <td>14 Jan 2025</td>
+        </tr>
+
+        <tr class="border-b border-gray-800 hover:bg-white/5 transition">
+          <td class="py-3">December 2024</td>
+          <td>₹11,450</td>
+          <td><span class="text-success font-semibold">Paid</span></td>
+          <td>14 Dec 2024</td>
+        </tr>
+
+        <tr class="border-b border-gray-800 hover:bg-white/5 transition">
+          <td class="py-3">November 2024</td>
+          <td>₹11,450</td>
+          <td><span class="text-success font-semibold">Paid</span></td>
+          <td>14 Nov 2024</td>
+        </tr>
+
+        <tr class="border-b border-gray-800 hover:bg-white/5 transition">
+          <td class="py-3">October 2024</td>
+          <td>₹11,450</td>
+          <td><span class="text-danger font-semibold">Failed</span></td>
+          <td>—</td>
+        </tr>
+
+        <tr class="hover:bg-white/5 transition">
+          <td class="py-3">September 2024</td>
+          <td>₹11,450</td>
+          <td><span class="text-success font-semibold">Paid</span></td>
+          <td>14 Sep 2024</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+ß
+</main>
+
+
+<script>
+  // Search filter
+  document.getElementById("transactionSearch").addEventListener("input", function () {
+    const term = this.value.toLowerCase();
+
+    document.querySelectorAll("#transactionTable tr").forEach(row => {
+      row.style.display = row.innerText.toLowerCase().includes(term) ? "" : "none";
+    });
+  });
+</script>
+
+</body>
+</html>

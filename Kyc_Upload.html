@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KYC Upload — LoanAI</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#0ea5ff",
+            electric: "#38bdf8",
+            accent: "#0f172a",
+          },
+          boxShadow: {
+            neon: "0 8px 40px rgba(14,165,255,0.28), 0 4px 14px rgba(56,189,248,0.15)",
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body { font-family: Inter, ui-sans-serif, system-ui; }
+
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      backdrop-filter: blur(10px);
+    }
+
+    @keyframes floatUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-floatUp {
+      animation: floatUp .85s ease-out both;
+    }
+
+    .drop-zone-hover {
+      border-color: #0ea5ff !important;
+      background-color: rgba(14,165,255,0.05);
+    }
+  </style>
+
+</head>
+
+<body class="bg-black text-gray-200 min-h-screen py-12 flex items-center justify-center">
+
+  <div class="w-full max-w-4xl px-6">
+
+    <!-- Header -->
+    <div class="text-center mb-10 animate-floatUp">
+      <h1 class="text-3xl font-bold text-white neon-text">KYC Verification</h1>
+      <p class="text-gray-400 mt-2 max-w-2xl mx-auto">
+        Upload your PAN, Aadhaar and Income Proof securely. Our AI instantly verifies documents with 99% accuracy.
+      </p>
+    </div>
+
+    <!-- Progress Section -->
+    <div class="flex justify-center gap-6 mb-10 animate-floatUp">
+      <div class="text-center">
+        <div class="w-10 h-10 rounded-full bg-primary text-black flex items-center justify-center font-bold shadow-neon">1</div>
+        <div class="text-sm mt-2 text-primary font-semibold">Upload</div>
+      </div>
+
+      <div class="w-10 h-[1px] bg-blue-800/40 mt-5"></div>
+
+      <div class="text-center opacity-50">
+        <div class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center font-bold">2</div>
+        <div class="text-sm mt-2 text-gray-500">Review</div>
+      </div>
+
+      <div class="w-10 h-[1px] bg-blue-800/40 mt-5"></div>
+
+      <div class="text-center opacity-50">
+        <div class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center font-bold">3</div>
+        <div class="text-sm mt-2 text-gray-500">Complete</div>
+      </div>
+    </div>
+
+    <!-- Upload Form -->
+    <div class="glass border border-blue-800/40 rounded-2xl shadow-neon p-8 animate-floatUp">
+
+      <form id="kycForm" class="space-y-8">
+
+        <!-- PAN Upload -->
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-2">PAN Card</label>
+
+          <div id="panZone"
+               class="drop-zone cursor-pointer rounded-xl border-2 border-dashed border-gray-700 p-6 text-center transition">
+            <p class="text-gray-400">Drag & Drop or <span class="text-primary font-semibold">browse</span></p>
+            <input id="panInput" type="file" accept="image/*,application/pdf" class="hidden" />
+          </div>
+
+          <p id="panFile" class="text-sm text-primary mt-2 hidden"></p>
+        </div>
+
+        <!-- Aadhaar Upload -->
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-2">Aadhaar</label>
+
+          <div id="aadhaarZone"
+               class="drop-zone cursor-pointer rounded-xl border-2 border-dashed border-gray-700 p-6 text-center transition">
+            <p class="text-gray-400">Drag & Drop or <span class="text-primary font-semibold">browse</span></p>
+            <input id="aadhaarInput" type="file" accept="image/*,application/pdf" class="hidden" />
+          </div>
+
+          <p id="aadhaarFile" class="text-sm text-primary mt-2 hidden"></p>
+        </div>
+
+        <!-- Income Proof -->
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-2">Income Proof (Salary Slip / Bank Statement)</label>
+
+          <div id="incomeZone"
+               class="drop-zone cursor-pointer rounded-xl border-2 border-dashed border-gray-700 p-6 text-center transition">
+            <p class="text-gray-400">Drag & Drop or <span class="text-primary font-semibold">browse</span></p>
+            <input id="incomeInput" type="file" accept="image/*,application/pdf" class="hidden" />
+          </div>
+
+          <p id="incomeFile" class="text-sm text-primary mt-2 hidden"></p>
+        </div>
+
+        <button class="w-full px-4 py-3 bg-primary text-black rounded-xl font-semibold hover:brightness-110 transition">
+          Continue
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+
+  <script>
+    // Helper to bind zone + input
+    function setupDropZone(zoneId, inputId, fileLabelId) {
+      const zone = document.getElementById(zoneId);
+      const input = document.getElementById(inputId);
+      const label = document.getElementById(fileLabelId);
+
+      zone.addEventListener("click", () => input.click());
+
+      zone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        zone.classList.add("drop-zone-hover");
+      });
+
+      zone.addEventListener("dragleave", () => zone.classList.remove("drop-zone-hover"));
+
+      zone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        zone.classList.remove("drop-zone-hover");
+
+        const file = e.dataTransfer.files[0];
+        if(file) {
+          input.files = e.dataTransfer.files;
+          label.textContent = "Uploaded: " + file.name;
+          label.classList.remove("hidden");
+        }
+      });
+
+      input.addEventListener("change", () => {
+        const file = input.files[0];
+        if(file) {
+          label.textContent = "Uploaded: " + file.name;
+          label.classList.remove("hidden");
+        }
+      });
+    }
+
+    setupDropZone("panZone", "panInput", "panFile");
+    setupDropZone("aadhaarZone", "aadhaarInput", "aadhaarFile");
+    setupDropZone("incomeZone", "incomeInput", "incomeFile");
+
+    document.getElementById("kycForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      alert("KYC Uploaded (mock). Redirecting to Review Stage...");
+      window.location.href = "personal-info.html";
+    });
+  </script>
+</body>
+</html>
