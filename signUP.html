@@ -62,19 +62,6 @@
         <p class="text-gray-400 max-w-md">
           Your personalized, AI-enhanced loan dashboard. Track applications, receive instant offers, and manage your finances effortlessly.
         </p>
-
-        <div class="mt-8 bg-white/5 p-5 rounded-2xl border border-blue-800/30 glass shadow-neon">
-          <div class="grid grid-cols-2 gap-4">
-            <div class="p-4 bg-black/40 rounded-xl border border-blue-800/20">
-              <div class="text-xs text-gray-400">Avg Approval Time</div>
-              <div class="text-xl font-bold text-primary mt-1">4 min</div>
-            </div>
-            <div class="p-4 bg-black/40 rounded-xl border border-blue-800/20">
-              <div class="text-xs text-gray-400">Customer Base</div>
-              <div class="text-xl font-bold text-primary mt-1">2.1M+</div>
-            </div>
-          </div>
-        </div>
       </div>
 
       <!-- Signup Form -->
@@ -83,27 +70,78 @@
           <h3 class="text-xl font-bold text-white mb-4">Sign Up</h3>
 
           <form id="signupForm" class="space-y-4">
+
+            <!-- FULL NAME -->
             <div>
               <label class="text-sm text-gray-400">Full Name</label>
-              <input type="text" required class="mt-2 w-full p-3 rounded-md bg-transparent border border-gray-800 focus:ring-2 focus:ring-primary" placeholder="John Doe" />
+              <input type="text" required
+                     class="mt-2 w-full p-3 rounded-md bg-transparent border border-gray-800 
+                            focus:ring-2 focus:ring-primary"
+                     placeholder="John Doe" />
             </div>
 
+            <!-- BANK DROPDOWN -->
+            <div>
+              <label class="text-sm text-gray-400">Select Your Bank</label>
+              <select id="bankSelect" required
+                      class="mt-2 w-full p-3 rounded-md bg-transparent border border-gray-800 
+                             focus:ring-2 focus:ring-primary text-gray-300">
+                <option value="">-- Choose Bank --</option>
+                <option value="SBI">State Bank of India (SBI)</option>
+                <option value="HDFC">HDFC Bank</option>
+                <option value="ICICI">ICICI Bank</option>
+                <option value="AXIS">Axis Bank</option>
+                <option value="PNB">Punjab National Bank</option>
+              </select>
+            </div>
+
+            <!-- BANK ID -->
+            <div>
+              <label class="text-sm text-gray-400">Bank ID (Auto-formatted)</label>
+              <input type="text" id="bankIdInput" required
+                     class="mt-2 w-full p-3 rounded-md bg-transparent border border-blue-800 
+                            focus:ring-2 focus:ring-primary"
+                     placeholder="Ex: SBI-12345" />
+
+              <!-- Dynamic Warning -->
+              <p id="bankIdWarning" class="text-red-400 text-xs mt-1 hidden">
+                ⚠ Invalid Bank ID format. Must look like: SBI-12345
+              </p>
+            </div>
+
+            <!-- EMAIL -->
             <div>
               <label class="text-sm text-gray-400">Email</label>
-              <input type="email" required class="mt-2 w-full p-3 rounded-md bg-transparent border border-gray-800 focus:ring-2 focus:ring-primary" placeholder="you@email.com" />
+              <input type="email" required
+                     class="mt-2 w-full p-3 rounded-md bg-transparent border border-gray-800 
+                            focus:ring-2 focus:ring-primary"
+                     placeholder="you@email.com" />
             </div>
 
+            <!-- PASSWORD -->
             <div>
               <label class="text-sm text-gray-400">Password</label>
-              <input type="password" required class="mt-2 w-full p-3 rounded-md bg-transparent border border-gray-800 focus:ring-2 focus:ring-primary" placeholder="••••••••" />
+              <input type="password" required
+                     class="mt-2 w-full p-3 rounded-md bg-transparent border border-gray-800 
+                            focus:ring-2 focus:ring-primary"
+                     placeholder="••••••••" />
             </div>
 
+            <!-- TERMS -->
             <div class="flex items-start gap-3 text-sm text-gray-400">
               <input type="checkbox" required class="mt-1 h-4 w-4 rounded bg-black/60 border-gray-700" />
-              <span>I agree to LoanAI’s <a href="#" class="text-primary">Terms</a> and <a href="#" class="text-primary">Privacy Policy</a>.</span>
+              <span>
+                I agree to LoanAI’s <a href="#" class="text-primary">Terms</a> and
+                <a href="#" class="text-primary">Privacy Policy</a>.
+              </span>
             </div>
 
-            <button class="w-full px-4 py-3 bg-primary text-black rounded-md font-semibold hover:brightness-110 transition">Create Account</button>
+            <!-- SUBMIT BUTTON -->
+            <button type="submit"
+              class="w-full px-4 py-3 bg-primary text-black rounded-md font-semibold 
+                     hover:brightness-110 transition">
+              Create Account
+            </button>
           </form>
 
           <div class="mt-6 text-center text-sm text-gray-400">
@@ -111,19 +149,51 @@
           </div>
         </div>
 
-        <div class="mt-6 max-w-md mx-auto text-sm text-gray-500">
-          By creating an account, you gain instant access to eligibility checking, AI-driven analysis, and personalized loan recommendations.
-        </div>
       </div>
 
     </div>
   </div>
 
   <script>
-    document.getElementById('signupForm').addEventListener('submit', function(e){
-      e.preventDefault();
-      alert('Account created (mock). Redirecting…');
-      window.location.href = 'login.html';
+    const bankSelect = document.getElementById("bankSelect");
+    const bankIdInput = document.getElementById("bankIdInput");
+    const warning = document.getElementById("bankIdWarning");
+
+    /* Auto-format Bank ID */
+    bankIdInput.addEventListener("input", () => {
+      const bankCode = bankSelect.value;
+      let value = bankIdInput.value.replace(/\D/g, "").slice(0, 5);
+
+      if (bankCode) {
+        bankIdInput.value = `${bankCode}-${value}`;
+      }
+    });
+
+    /* Dynamic Validation */
+    bankIdInput.addEventListener("keyup", () => {
+      const bankCode = bankSelect.value;
+      const pattern = new RegExp(`^${bankCode}-\\d{5}$`);
+
+      if (bankCode && !pattern.test(bankIdInput.value)) {
+        warning.classList.remove("hidden");
+      } else {
+        warning.classList.add("hidden");
+      }
+    });
+
+    /* Stop invalid submit */
+    document.getElementById("signupForm").addEventListener("submit", function(e){
+      const bankCode = bankSelect.value;
+      const pattern = new RegExp(`^${bankCode}-\\d{5}$`);
+
+      if (!pattern.test(bankIdInput.value)) {
+        e.preventDefault();
+        warning.classList.remove("hidden");
+        return;
+      }
+
+      alert("Account created (mock). Redirecting...");
+      window.location.href = "login.html";
     });
   </script>
 
