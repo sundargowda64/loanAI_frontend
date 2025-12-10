@@ -97,7 +97,7 @@
 
             <!-- BANK ID -->
             <div>
-              <label class="text-sm text-gray-400">Bank ID (Auto-formatted)</label>
+              <label class="text-sm text-gray-400">Customer ID (Auto-formatted)</label>
               <input type="text" id="bankIdInput" required
                      class="mt-2 w-full p-3 rounded-md bg-transparent border border-blue-800 
                             focus:ring-2 focus:ring-primary"
@@ -111,17 +111,18 @@
 
             <!-- EMAIL -->
             <div>
-              <label class="text-sm text-gray-400">Email</label>
+              <label class="text-sm text-gray-400">Email or Ph.no</label>
               <input type="email" required
                      class="mt-2 w-full p-3 rounded-md bg-transparent border border-gray-800 
                             focus:ring-2 focus:ring-primary"
-                     placeholder="you@email.com" />
+                     placeholder="you@email.com or 9911xxxxxx" />
+              <button class="text-primary font-semibold">get OTP</button>
             </div>
 
             <!-- PASSWORD -->
             <div>
-              <label class="text-sm text-gray-400">Password</label>
-              <input type="password" required
+              <label class="text-sm text-gray-400">OTP</label>
+              <input type="one time password" required
                      class="mt-2 w-full p-3 rounded-md bg-transparent border border-gray-800 
                             focus:ring-2 focus:ring-primary"
                      placeholder="••••••••" />

@@ -80,10 +80,23 @@
         <div class="bg-gradient-to-br from-[#021226] to-[#000814] p-8 rounded-2xl border border-blue-800/40 glass shadow-neon w-full max-w-md animate-floatUp">
           <h3 class="text-xl font-bold text-white mb-4">Sign in to LoanAI</h3>
 
+          <div>
+            <label class="text-sm text-gray-400">Customer ID (Auto-formatted)</label>
+            <input type="text" id="bankIdInput" required
+                   class="mt-2 w-full p-3 rounded-md bg-transparent border border-blue-800 
+                          focus:ring-2 focus:ring-primary"
+                   placeholder="Ex: SBI-12345" />
+
+            <!-- Dynamic Warning -->
+            <p id="bankIdWarning" class="text-red-400 text-xs mt-1 hidden">
+              ⚠ Invalid Bank ID format. Must look like: SBI-12345
+            </p>
+          </div>
+
           <form id="loginForm" class="space-y-4">
             <div>
-              <label class="text-sm text-gray-400">Email</label>
-              <input id="email" type="email" required class="mt-2 w-full p-3 rounded-md bg-transparent border border-gray-800 focus:ring-2 focus:ring-primary outline-none" placeholder="you@company.com" />
+              <label class="text-sm text-gray-400">Email or Ph.no</label>
+              <input id="email" type="email" required class="mt-2 w-full p-3 rounded-md bg-transparent border border-gray-800 focus:ring-2 focus:ring-primary outline-none" placeholder="you@company.com or 9911xxxxxx" />
             </div>
 
             <div>
